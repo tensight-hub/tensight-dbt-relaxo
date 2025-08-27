@@ -56,3 +56,47 @@ Happy modeling!
 [0m22:04:02.288880 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182D2D05E00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182D2D34EF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182D21FF020>]}
 [0m22:04:02.289889 [debug] [MainThread]: Flushing usage events
 [0m22:04:03.590751 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m20:41:10.950177 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E2E160BB60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E2E29FBED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E2E29FBC50>]}
+
+
+============================== 20:41:10.957027 | bab84895-dcdd-482f-b19c-80ab023fb0a2 ==============================
+[0m20:41:10.957027 [info ] [MainThread]: Running with dbt=1.10.7
+[0m20:41:10.958379 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\Users\\Dell\\.dbt', 'version_check': 'True', 'debug': 'False', 'log_path': 'logs', 'warn_error': 'None', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt debug', 'static_parser': 'True', 'introspect': 'True', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m20:41:11.012093 [info ] [MainThread]: dbt version: 1.10.7
+[0m20:41:11.012852 [info ] [MainThread]: python version: 3.13.6
+[0m20:41:11.013584 [info ] [MainThread]: python path: C:\Users\Dell\AppData\Local\Programs\Python\Python313\python.exe
+[0m20:41:11.014327 [info ] [MainThread]: os info: Windows-11-10.0.26100-SP0
+[0m20:41:17.294043 [info ] [MainThread]: target not specified in profile 'outputs', using 'default'
+[0m20:41:17.295940 [info ] [MainThread]: target not specified in profile 'relaxo', using 'default'
+[0m20:41:17.299474 [info ] [MainThread]: Using profiles dir at C:\Users\Dell\.dbt
+[0m20:41:17.300186 [info ] [MainThread]: Using profiles.yml file at C:\Users\Dell\.dbt\profiles.yml
+[0m20:41:17.300845 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\Dell\tensight-dbt-relaxo\dbt_project.yml
+[0m20:41:17.301810 [info ] [MainThread]: Configuration:
+[0m20:41:17.302542 [info ] [MainThread]:   profiles.yml file [[31mERROR invalid[0m]
+[0m20:41:17.303303 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m20:41:17.303952 [info ] [MainThread]: Required dependencies:
+[0m20:41:17.304764 [debug] [MainThread]: Executing "git --help"
+[0m20:41:17.360885 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m20:41:17.361676 [debug] [MainThread]: STDERR: "b''"
+[0m20:41:17.362462 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m20:41:17.363617 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m20:41:17.364586 [info ] [MainThread]: [31m2 checks failed:[0m
+[0m20:41:17.365684 [info ] [MainThread]: Could not load dbt_project.yml
+Profile loading failed for the following reason:
+Runtime Error
+  outputs not specified in profile 'outputs'
+
+Runtime Error
+  The profile 'relaxo' does not have a target named 'default'. The valid target names for this profile are:
+   - dev
+   - prod
+
+
+[0m20:41:17.366903 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <C:\Users\Dell\tensight-dbt-relaxo\dbt_project.yml> not found
+
+[0m20:41:17.368187 [debug] [MainThread]: Command `dbt debug` failed at 20:41:17.368041 after 6.73 seconds
+[0m20:41:17.368583 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E2E4A1F360>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E2E4A59370>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E2E3B147C0>]}
+[0m20:41:17.368959 [debug] [MainThread]: Flushing usage events
+[0m20:41:18.640822 [debug] [MainThread]: An error was encountered while trying to flush usage events

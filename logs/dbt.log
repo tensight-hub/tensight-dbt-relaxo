@@ -27,3 +27,32 @@ Happy modeling!
 [0m14:17:33.444220 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201CFA81E00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201CFAB0EF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201CEF7F020>]}
 [0m14:17:33.446402 [debug] [MainThread]: Flushing usage events
 [0m14:17:34.439781 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:01:29.284211 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182CF93FB60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182D1D1BED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182D1D1BC50>]}
+
+
+============================== 22:01:29.298351 | d9148087-4de8-40aa-a9e8-626d6b791be2 ==============================
+[0m22:01:29.298351 [info ] [MainThread]: Running with dbt=1.10.7
+[0m22:01:29.299998 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'version_check': 'True', 'log_path': 'logs', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\Dell\\.dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'static_parser': 'True', 'introspect': 'True', 'invocation_command': 'dbt init relaxo', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'send_anonymous_usage_stats': 'True'}
+[0m22:01:29.363810 [debug] [MainThread]: Starter project path: C:\Users\Dell\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\include\starter_project
+[0m22:01:29.406537 [info ] [MainThread]: 
+Your new dbt project "relaxo" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m22:01:29.407676 [info ] [MainThread]: Setting up your profile.
+[0m22:04:02.286875 [info ] [MainThread]: Profile relaxo written to C:\Users\Dell\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m22:04:02.288318 [debug] [MainThread]: Command `dbt init` succeeded at 22:04:02.288091 after 153.35 seconds
+[0m22:04:02.288880 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182D2D05E00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182D2D34EF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000182D21FF020>]}
+[0m22:04:02.289889 [debug] [MainThread]: Flushing usage events
+[0m22:04:03.590751 [debug] [MainThread]: An error was encountered while trying to flush usage events

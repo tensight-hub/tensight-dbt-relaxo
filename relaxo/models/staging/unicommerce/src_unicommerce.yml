@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+    - name: unicommerce
+      schema: custom_tensight_relaxo_raw
+      tables:
+        - name: uniware_sales_banglore
+        - name: uniware_sales_bhiwandi
+        - name: uniware_sales_ghevra
+        - name: uniware_sales_gurgram
+        - name: uniware_sales_hyderabad
+        - name: uniware_sales_kolkata
+        - name: uniware_sales_mundkanew
+        - name: uniware_inventory_banglore
+        - name: uniware_inventory_bhiwandi
+        - name: uniware_inventory_ghevra
+        - name: uniware_inventory_gurgram
+        - name: uniware_inventory_hyderabad
+        - name: uniware_inventory_kolkata
+        - name: uniware_inventory_mundkanew

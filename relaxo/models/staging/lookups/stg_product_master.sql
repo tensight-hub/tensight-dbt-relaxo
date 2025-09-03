@@ -10,7 +10,7 @@ renamed as (
 
     select  
        channel,
-       "relaxo sku" as relaxo_sku,
+       "relaxo sku" as sku_relaxo,
         sku as brand_sku_id,
         ean as brand_ean,
        "channel id (asin/fsn)" as channel_sku_id,	

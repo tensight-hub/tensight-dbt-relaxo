@@ -18,3 +18,4 @@ sources:
         - name: uniware_inventory_hyderabad
         - name: uniware_inventory_kolkata
         - name: uniware_inventory_mundkanew
+        - name: rating_and_reviews

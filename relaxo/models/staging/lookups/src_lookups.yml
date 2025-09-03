@@ -5,3 +5,4 @@ sources:
       schema: custom_tensight_relaxo_raw
       tables:
         - name: product_master
+        - name: price_parity_master

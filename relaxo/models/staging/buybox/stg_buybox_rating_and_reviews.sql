@@ -1,6 +1,6 @@
 with source as (
   select *
-  from {{ source('unicommerce', 'rating_and_reviews') }}
+  from {{ source('buybox', 'rating_and_reviews') }}
 ),
 renamed as (
   select    

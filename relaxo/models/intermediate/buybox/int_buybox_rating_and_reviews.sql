@@ -17,6 +17,6 @@ SELECT
 FROM {{ ref('stg_price_parity_master') }} pp
 LEFT JOIN {{ ref('stg_product_master') }} pm
     ON pp."ean /relaxo sku (which ever is common across the channels)" = pm."relaxo sku"
-LEFT JOIN {{ ref('stg_unicommerce_rating_and_reviews') }} rr
+LEFT JOIN {{ ref('stg_buybox_rating_and_reviews') }} rr
     ON pm."channel id (asin/fsn)" = rr.product_id
 WHERE rr.scraped_date IS NOT NULL;

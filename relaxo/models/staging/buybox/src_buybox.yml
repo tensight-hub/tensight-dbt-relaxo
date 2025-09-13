@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: buybox
+    schema: custom_tensight_relaxo_raw
+    tables:
+      - name: rating_and_reviews
+
+  - name: buybox_overview
+    schema: custom_tensight_relaxo_agg_prod_overview
+    tables:
+      - name: price_across_channels
+      - name: review_across_channels
+      - name: rating_across_channels
+
+       

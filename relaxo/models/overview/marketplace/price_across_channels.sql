@@ -1,14 +1,12 @@
-
-
-select * from
-(SELECT
+SELECT
     rr.scraped_date,
     pp.relaxo_sku,
     pm.sku_category,
     pm.sku_sub_category,
+    pm.name,
     pm.sku_size,
     pm.sku_gender,
-    rr.seller_name,
+    
     MAX(CASE
         WHEN rr.source = 'amazon'
         THEN
@@ -27,20 +25,18 @@ select * from
         THEN CAST(CASE WHEN lower(rr.product_price) = 'nan' THEN '0' ELSE rr.product_price END AS DECIMAL(10, 2))
     END) AS ajio_price
 
-
 FROM
     {{ ref('stg_price_parity_master') }} pp
 LEFT JOIN
     {{ ref('stg_product_master') }} pm 
        ON pp.relaxo_sku = pm.sku_relaxo
 LEFT JOIN
-    {{ ref('stg_unicommerce_rating_and_reviews') }} rr 
+     {{ ref('stg_buybox_rating_and_reviews') }} rr 
     ON pm.channel_sku_id = rr.product_id
 WHERE
     rr.scraped_date IS NOT NULL
 GROUP BY
-
-    rr.seller_name,
+    pm.name,
     rr.scraped_date,
     pp.relaxo_sku,
     pm.sku_category,
@@ -48,11 +44,7 @@ GROUP BY
     pm.sku_size,
     pm.sku_gender
 ORDER BY
-    pp.relaxo_sku
-)
-WHERE seller_name IS NOT NULL 
-  AND lower(seller_name) != 'nan'
-    
-    
+    pp.relaxo_sku;
+
     
    

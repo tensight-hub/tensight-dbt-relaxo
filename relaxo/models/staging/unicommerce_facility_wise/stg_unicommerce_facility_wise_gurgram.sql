@@ -86,10 +86,9 @@ renamed as (
             when lower("channel name") = 'shopify' then 'Shopify'
             when lower("channel name") like 'snapmint%' then 'Snapmint'
             else "channel name"
-        end as master_mapping_channel_name,
+        end as master_mapping_channel_name
 
-        -- facility code for Bangalore
-        'GUR04' as facility_code
+    
 
     from source
 )

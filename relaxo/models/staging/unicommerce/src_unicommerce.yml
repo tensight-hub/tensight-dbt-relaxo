@@ -19,3 +19,10 @@ sources:
         - name: uniware_inventory_kolkata
         - name: uniware_inventory_mundkanew
         - name: rating_and_reviews
+        - name: returns_uniware_bangalore
+        - name: returns_uniware_bhiwandi
+        - name: returns_uniware_ghevra
+        - name: returns_uniware_gurugram
+        - name: returns_uniware_hyderabad
+        - name: returns_uniware_kolkata
+        - name: returns_uniware_mundkha_new

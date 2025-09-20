@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+    - name: ajio
+      schema: custom_tensight_relaxo_raw
+      tables:
+        - name: returns_ajio
+
+
+
+       

@@ -88,7 +88,8 @@ renamed as (
             when lower("channel name") like 'snapmint%' then 'Snapmint'
             when lower("channel name") like 'tatacliq%' then 'TataCliq'
             else "channel name"
-        end as master_mapping_channel_name
+        end as master_mapping_channel_name,
+        'Bhiwandi1' as facility_code
 
         
          

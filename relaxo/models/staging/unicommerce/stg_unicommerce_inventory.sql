@@ -2,31 +2,31 @@ with
 
 source as (
 
-select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Bangalore 3PL' as facility_code from {{ source('unicommerce', 'uniware_inventory_banglore') }}
+select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Bangalore1' as facility_code from {{ source('unicommerce', 'uniware_inventory_banglore') }}
 
 UNION ALL 
 
-select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Bhiwandi 3PL' as facility_code from {{ source('unicommerce', 'uniware_inventory_bhiwandi') }}
+select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Bhiwandi1' as facility_code from {{ source('unicommerce', 'uniware_inventory_bhiwandi') }}
 
 UNION ALL
   
-select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Ghevra' as facility_code from {{ source('unicommerce', 'uniware_inventory_ghevra') }}
+select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Ghevra1' as facility_code from {{ source('unicommerce', 'uniware_inventory_ghevra') }}
 
 UNION ALL 
 
-select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Gurugram 3PL' as facility_code from {{ source('unicommerce', 'uniware_inventory_gurgram') }}
+select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Gurugram1' as facility_code from {{ source('unicommerce', 'uniware_inventory_gurgram') }}
 
 UNION ALL
 
-select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Hyderabad' as facility_code from {{ source('unicommerce', 'uniware_inventory_hyderabad') }}
+select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Hyderabad1' as facility_code from {{ source('unicommerce', 'uniware_inventory_hyderabad') }}
 
 UNION ALL
 
-select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Kolkata warehouse' as facility_code from {{ source('unicommerce', 'uniware_inventory_kolkata') }}
+select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Kolkata1' as facility_code from {{ source('unicommerce', 'uniware_inventory_kolkata') }}
 
 UNION ALL
 
-select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Mundkanew' as facility_code from {{ source('unicommerce', 'uniware_inventory_mundkanew') }}
+select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock on hand)", "available (atp)", "blocked (committed)", "not found", size, color, brand, updated, "inventory allocation", "inventory sync", "sku mixing", "shelf on hold", image, "pendency on all channels", "total inventory", "item type inventory id", stock_date, 'Mundkanew1' as facility_code from {{ source('unicommerce', 'uniware_inventory_mundkanew') }}
 
 ),
 

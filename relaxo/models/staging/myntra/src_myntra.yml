@@ -1,0 +1,7 @@
+version: 2
+
+sources:
+    - name: myntra
+      schema: custom_tensight_relaxo_raw
+      tables:
+        - name: returns_myntra

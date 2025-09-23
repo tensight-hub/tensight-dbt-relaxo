@@ -17,7 +17,7 @@ renamed as (
        "channel id (asin/fsn)" as channel_sku_id,	
         name,
         lower(category) as sku_category,
-        lower("sub category") as sku_sub_category,
+        lower(trim(replace("sub category", '-', ' '))) as sku_sub_category,
         size as sku_size,
         lower(gender) as sku_gender,
         "sub-brand" as sub_brand,

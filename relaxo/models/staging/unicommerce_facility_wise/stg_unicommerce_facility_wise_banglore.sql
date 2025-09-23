@@ -61,10 +61,7 @@ renamed as (
         case when "delivery time" = 'nan' then null else cast(date_parse("delivery time", '%Y-%m-%d %H:%i:%s') as date) end as delivery_time,
         case when "reverse pickup created date" = 'nan' then null else cast(date_parse("reverse pickup created date", '%Y-%m-%d %H:%i:%s') as date) end as reverse_pickup_created_date,
 
-         case when "order date as dd/mm/yyyy hh:mm:ss" = 'nan'
-            then null
-            else cast(date_parse("order date as dd/mm/yyyy hh:mm:ss", '%d/%m/%Y %H:%i:%s') as date)
-        end as order_date,
+        cast(date_parse("order date as dd/mm/yyyy hh:mm:ss", '%Y-%m-%d %H:%i:%s') as date) as order_date,
 
         case when "fulfillment tat" = 'nan' then null else cast(date_parse("fulfillment tat", '%Y-%m-%d %H:%i:%s') as date) end as fulfillment_tat,
         case when "invoice created" = 'nan' then null else cast(date_parse("invoice created", '%Y-%m-%d %H:%i:%s') as date) end as invoice_created,

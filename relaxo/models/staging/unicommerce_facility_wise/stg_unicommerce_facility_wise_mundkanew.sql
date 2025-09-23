@@ -60,10 +60,7 @@ renamed as (
         case when "delivery time" = 'nan' then null else cast(date_parse("delivery time", '%Y-%m-%d %H:%i:%s') as date) end as delivery_time,
         case when "reverse pickup created date" = 'nan' then null else cast(date_parse("reverse pickup created date", '%Y-%m-%d %H:%i:%s') as date) end as reverse_pickup_created_date,
 
-         case when "order date as dd/mm/yyyy hh:mm:ss" = 'nan'
-            then null
-            else cast(date_parse("order date as dd/mm/yyyy hh:mm:ss", '%d/%m/%Y %H:%i:%s') as date)
-        end as order_date,
+        cast(date_parse("order date as dd/mm/yyyy hh:mm:ss", '%Y-%m-%d %H:%i:%s') as date) as order_date,
 
         case when "fulfillment tat" = 'nan' then null else cast(date_parse("fulfillment tat", '%Y-%m-%d %H:%i:%s') as date) end as fulfillment_tat,
         case when "invoice created" = 'nan' then null else cast(date_parse("invoice created", '%Y-%m-%d %H:%i:%s') as date) end as invoice_created,
@@ -79,15 +76,17 @@ renamed as (
         -- channel mapping
         case
             when lower("channel name") like 'ajio%' then 'Ajio'
+            when lower("channel name") like 'amazon%' then 'Amazon'
             when lower("channel name") like 'flipkart%' then 'Flipkart'
             when lower("channel name") like 'jiomart%' then 'Jiomart'
             when lower("channel name") like 'meesho%' then 'Meesho'
             when lower("channel name") like 'myntrappmp%' or lower("channel name") like 'myntra%' then 'Myntra'
-            when lower("channel name") = 'shopify' then 'Shopify'
+            when lower("channel name") like 'shopify' then 'Shopify'
             when lower("channel name") like 'snapmint%' then 'Snapmint'
+             
             else "channel name"
         end as master_mapping_channel_name,
-        'Gurugram1' as facility_code
+        'Mundkanew1' as facility_code
         
 
     

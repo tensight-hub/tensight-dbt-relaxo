@@ -1,22 +1,27 @@
 
 
 SELECT
-    pp."ean /relaxo sku (which ever is common across the channels)" AS relaxo_sku,
-    pm."relaxo sku" AS product_master_sku,
-    pm."channel id (asin/fsn)" AS product_id,
-    lower(pm.category) AS category,
-    lower(pm."sub category") AS sub_category,
-    pm.size,
-    lower(pm.gender) AS gender,
+    pp.relaxo_sku,
+    pm.sku_relaxo,
+    pm.channel_sku_id,
+    pm.sku_category,
+    pm.sku_sub_category,
+    pm.sku_size,
+    pm.sku_gender,
+    pm.name,
     rr.source,
-
-    CAST(
-        CASE WHEN lower(rr.product_price) = 'nan' THEN '0' ELSE rr.product_price END AS DECIMAL(10,2)
-    ) AS clean_price,
-    try_cast(rr.scraped_date AS timestamp) AS scraped_date
+    rr.scraped_date,
+    rr.seller_name,
+    rr.product_price,
+    rr.no_of_reviews,
+    rr.avg_rating,
+    rr.product_id,
+    max(rr.image_url) as image_url
 FROM {{ ref('stg_price_parity_master') }} pp
 LEFT JOIN {{ ref('stg_product_master') }} pm
-    ON pp."ean /relaxo sku (which ever is common across the channels)" = pm."relaxo sku"
+    ON pp.relaxo_sku = pm.sku_relaxo
 LEFT JOIN {{ ref('stg_buybox_rating_and_reviews') }} rr
-    ON pm."channel id (asin/fsn)" = rr.product_id
-WHERE rr.scraped_date IS NOT NULL;
+    ON pm.channel_sku_id = rr.product_id
+WHERE rr.scraped_date IS NOT NULL
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+ORDER BY pp.relaxo_sku

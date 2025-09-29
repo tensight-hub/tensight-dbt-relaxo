@@ -1,3 +1,4 @@
+
 SELECT * FROM (
     SELECT
     rr.scraped_date,
@@ -7,6 +8,7 @@ SELECT * FROM (
     pm.name,
     pm.sku_size,
     pm.sku_gender,
+    max(image_url) AS image_url,
         MAX(CASE
             WHEN rr.source = 'amazon'
             THEN CASE WHEN lower(rr.seller_name) = 'nan' THEN '' ELSE rr.seller_name END
@@ -44,8 +46,11 @@ LEFT JOIN
     ORDER BY
         relaxo_sku
 ) AS buybox_results;
+ 
 
-    
-    
-    
-   
+
+
+
+
+
+ 

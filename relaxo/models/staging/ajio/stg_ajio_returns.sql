@@ -11,12 +11,15 @@ renamed as (
     select  
        "return order number" as return_order_no,
        	jiocode,
-       "seller sku" as seller_sku,
+        CASE
+        WHEN substr("seller sku", 1, 3) IN ('A1Z', 'A1M')THEN substr("seller sku", 1, 19)
+        ELSE substr("seller sku", 1, 18)
+        END AS channel_sku_code,
         ean,
         hsn,	
-        
-       "return status" as return_status,case when "return created date" = 'nan' then null else cast(date_parse("return created date", '%a %b %d %H:%i:%s IST %Y') as date) end as return_date,
-       "return qty" as return_qty,
+     "return status" as return_status,
+       case when "return created date" = 'nan' then null else cast(date_parse("return created date", '%a %b %d %H:%i:%s IST %Y') as date) end as channel_date,
+       "return qty" as channel_return_quantity,
        "return shipment id" as return_shipment_id,
        "return carrier name" as return_carrier_name,
        "return awb no" as return_awb_no,
@@ -59,7 +62,8 @@ renamed as (
         "fulfillment type" as fulfillment_type,
         "dc code" as dc_code,
         "pob id" as pob_id,
-        "seller name" as seller_name
+        "seller name" as seller_name,
+        'Ajio' AS channel_name
 
         from source)
 

@@ -16,7 +16,11 @@ renamed as (
         "seller sku code" as seller_sku_code,
         "parent sale order code" as parent_sale_order_code,
         "item code" as item_code,
-        "item sku code"  as item_sku_code,
+         CASE
+        WHEN substr("item sku code" , 1, 3) IN ('A1Z', 'A1M')
+            THEN substr("item sku code" , 1, 19)
+        ELSE substr("item sku code" , 1, 18)
+        END AS item_sku_code,
         "reverse pickup code" as reverse_pickup_code,
 
         -- product info

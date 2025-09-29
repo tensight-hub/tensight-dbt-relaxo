@@ -5,6 +5,7 @@ sources:
     schema: custom_tensight_relaxo_raw
     tables:
       - name: rating_and_reviews
+      - name: competitor_discount_analysis
 
   - name: buybox_overview
     schema: custom_tensight_relaxo_agg_prod_overview
@@ -12,5 +13,6 @@ sources:
       - name: price_across_channels
       - name: review_across_channels
       - name: rating_across_channels
+      
 
        

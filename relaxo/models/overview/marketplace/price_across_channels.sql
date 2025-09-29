@@ -67,7 +67,7 @@ SELECT
     {{ channel_price('source', 'product_price', 'amazon', 'amazon_price') }},
     {{ channel_price('source', 'product_price', 'flipkart', 'flipkart_price') }},
     {{ channel_price('source', 'product_price', 'myntra', 'myntra_price') }},
-    {{ channel_price('source', 'product_price', 'ajio', 'ajio_price') }}
+    {{ channel_price('source', 'product_price', 'Ajio', 'ajio_price') }}
 
 from 
 {{ ref('int_buybox_rating_and_reviews') }}

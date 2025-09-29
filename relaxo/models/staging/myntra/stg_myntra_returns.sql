@@ -14,7 +14,10 @@ renamed as (
        	warehouse_id,
         model,
         myntra_sku_code,
-        seller_sku_code,
+        CASE
+        WHEN substr(seller_sku_code, 1, 3) IN ('A1Z', 'A1M')THEN substr(seller_sku_code, 1, 19)
+        ELSE substr(seller_sku_code, 1, 18)
+        END AS channel_sku_code,
         style_id,
         sku_id,
         brand,
@@ -37,7 +40,7 @@ renamed as (
     case 
         when cast(return_created_date as varchar) = 'nan' then null 
         else cast(date_parse(cast(return_created_date as varchar), '%Y-%m-%d') as date) 
-    end as return_date,
+    end as channel_date,
     case 
         when cast(refunded_date as varchar) = 'nan' then null 
         else cast(date_parse(cast(refunded_date as varchar), '%Y-%m-%d') as date) 
@@ -56,7 +59,7 @@ renamed as (
         status,
         store_packet_id,
         seller_packet_id_fk,
-        quantity as return_qty,
+        quantity as channel_return_quantity,
         return_id,
         return_mode,
         return_reason,
@@ -69,7 +72,8 @@ renamed as (
         gatepass_id,
         gatepass_status,
         gatepass_type,
-        gatepass_lastmodified
+        gatepass_lastmodified,
+         'Myntra' AS channel_name
 
         from source)
 

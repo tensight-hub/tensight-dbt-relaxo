@@ -1,3 +1,4 @@
+
 SELECT
     rr.scraped_date,
     pp.relaxo_sku,
@@ -95,6 +96,77 @@ GROUP BY
 
 order by 
  relaxo_sku;
+
+
+/*
+SELECT
+    scraped_date,
+    relaxo_sku,
+    sku_category,
+    sku_sub_category,
+    name,
+    'Ratings' AS filter,
+    sku_size,
+    sku_gender,
+    max(image_url) AS image_url,
+    
+    {{ channel_avg_rating('source', 'avg_rating', 'amazon', 'amazon') }},
+    {{ channel_avg_rating('source', 'avg_rating', 'flipkart', 'flipkart') }},
+    {{ channel_avg_rating('source', 'avg_rating', 'myntra', 'myntra') }},
+    {{ channel_avg_rating('source', 'avg_rating', 'Ajio', 'ajio') }}
+
+from 
+{{ ref('int_buybox_rating_and_reviews') }}
+
+GROUP BY
+'Ratings',
+    name,
+    scraped_date,
+    relaxo_sku,
+    sku_category,
+    sku_sub_category,
+    sku_size,
+    sku_gender
+
+UNION ALL 
+
+
+    SELECT
+    scraped_date,
+    relaxo_sku,
+    sku_category,
+    sku_sub_category,
+    'Reviews' AS filter,
+    name,
+    sku_size,
+    sku_gender,
+    max(image_url) AS image_url,
+
+    {{ channel_reviews('source', 'no_of_reviews', 'amazon', 'amazon') }},
+    {{ channel_reviews('source', 'no_of_reviews', 'flipkart', 'flipkart') }},
+    {{ channel_reviews('source', 'no_of_reviews', 'myntra', 'myntra') }},
+    {{ channel_reviews('source', 'no_of_reviews', 'Ajio', 'ajio') }}
+
+from 
+{{ ref('int_buybox_rating_and_reviews') }}
+
+GROUP BY
+   'Reviews',
+    name,
+    scraped_date,
+    relaxo_sku,
+    sku_category,
+    sku_sub_category,
+    sku_size,
+    sku_gender
+
+    ORDER BY
+ relaxo_sku;
+ */
+
+
+
+
 
     
     

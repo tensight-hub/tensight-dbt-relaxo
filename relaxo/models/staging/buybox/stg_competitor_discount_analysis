@@ -1,0 +1,38 @@
+with source as (
+  select *
+  from {{ source('buybox', 'competitor_discount_analysis') }}
+),
+renamed as (
+  select    
+
+
+"sr.no" as sr_no,
+platform,
+datetime,
+keyword,
+pincode,
+product_id,
+product_url,
+product_name,
+product_rank,
+mrp,
+selling_price,
+discount_percent,
+product image link as product_image_link,
+case when lower(product_name) like '%sandal%' then 'Sandals'
+when lower(product_name) like '%flip flop%' then 'Flip Flops'
+when lower(product_name) like '%sneakers%' then 'Sneakers'
+when lower(product_name) like '%shoes%' then 'Shoes'
+when lower(product_name) like '%running shoes%' then 'Running Shoes'
+when lower(product_name) like '%casual shoes%' then 'Casual Shoes'
+when lower(product_name) like '%shoe%'  then '	Shoes'
+when lower(product_name)  like '%slipper%' then 'Slipper'
+when lower(product_name) like '%clogs%' then 'Clogs'
+when lower(product_name)  like '%slip on%'then 'slip on'
+end as category
+
+
+ 
+from source
+)
+select * from renamed;

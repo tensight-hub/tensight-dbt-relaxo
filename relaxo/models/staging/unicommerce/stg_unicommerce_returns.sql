@@ -60,8 +60,12 @@ renamed as (
     end as master_mapping_channel_entry,
     "channel ledger" as channel_ledger,
     "product name" as product_name,
-    "product sku code" as product_sku_code,
-    qty,
+    CASE
+        WHEN substr("product sku code", 1, 3) IN ('A1Z', 'A1M')
+            THEN substr("product sku code", 1, 19)
+        ELSE substr("product sku code", 1, 18)
+    END AS product_sku_code,
+    qty as  Warehouse_Return_Quantity,
     "unit price" as unit_price,
     currency,
     "conversion rate" as conversion_rate,

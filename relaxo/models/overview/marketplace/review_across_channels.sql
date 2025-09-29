@@ -1,4 +1,4 @@
-SELECT
+/* SELECT
     rr.scraped_date,
     pp.relaxo_sku,
     pm.sku_category,
@@ -6,6 +6,7 @@ SELECT
     pm.name,
     pm.sku_size,
     pm.sku_gender,
+    max(image_url) AS image_url,
     
      MAX(CASE
         WHEN rr.source = 'amazon'
@@ -47,6 +48,37 @@ GROUP BY
     pm.sku_gender
 ORDER BY
     pp.relaxo_sku;
+    */
+
+
+
+    SELECT
+    scraped_date,
+    relaxo_sku,
+    sku_category,
+    sku_sub_category,
+    name,
+    sku_size,
+    sku_gender,
+    max(image_url) AS image_url,
+
+    {{ channel_reviews('source', 'no_of_reviews', 'amazon', 'amazon_review_count') }},
+    {{ channel_reviews('source', 'no_of_reviews', 'flipkart', 'flipkart_review_count') }},
+    {{ channel_reviews('source', 'no_of_reviews', 'myntra', 'myntra_review_count') }},
+    {{ channel_reviews('source', 'no_of_reviews', 'Ajio', 'ajio_review_count') }}
+
+from 
+{{ ref('int_buybox_rating_and_reviews') }}
+
+GROUP BY
+    name,
+    scraped_date,
+    relaxo_sku,
+    sku_category,
+    sku_sub_category,
+    sku_size,
+    sku_gender;
+
 
     
    

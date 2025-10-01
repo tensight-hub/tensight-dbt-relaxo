@@ -1,6 +1,7 @@
 SELECT 
   uni_inv.sku_code,
   uni_inv.facility_code,
+
   sku_master.brand_sku_id, 
   sku_master.sku_category,
   sku_master.sku_sub_category,
@@ -65,4 +66,4 @@ LEFT JOIN (
   sku_gender
   FROM {{ ref('stg_product_master') }}
 ) AS sku_master 
-  ON uni_inv.sku_code = sku_master.sku_item_code
+  ON uni_inv.sku_code = sku_master.sku_item_code 

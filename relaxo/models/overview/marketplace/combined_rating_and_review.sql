@@ -8,6 +8,7 @@ SELECT
     'Ratings' AS filter,
     pm.sku_size,
     pm.sku_gender,
+    max(image_url) AS image_url,
     
      CAST(MAX(CASE
         WHEN rr.source = 'amazon'
@@ -58,6 +59,7 @@ SELECT
     'Reviews' AS filter,
     pm.sku_size,
     pm.sku_gender,
+    max(image_url) AS image_url,
     CAST(MAX(CASE
         WHEN rr.source = 'amazon'
         THEN CAST(CAST(CASE WHEN lower(rr.no_of_reviews) = 'nan' THEN '0' ELSE rr.no_of_reviews END AS DECIMAL) AS INT)

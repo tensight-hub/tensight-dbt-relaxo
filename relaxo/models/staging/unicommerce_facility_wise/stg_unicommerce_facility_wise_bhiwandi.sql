@@ -57,7 +57,7 @@ renamed as (
         case when "shipping charges" = 'nan' then 0 else cast("shipping charges" as double) end as shipping_charges,
 
         -- dates
-        created,
+        case when created = 'nan' then null else cast(date_parse(created, '%Y-%m-%d %H:%i:%s') as date) end as created_date,
         updated,
             case when "dispatch date" = 'nan' then null else cast(date_parse("dispatch date", '%Y-%m-%d %H:%i:%s') as date) end as dispatch_date,
             case when "return date" = 'nan' then null else cast(date_parse("return date", '%Y-%m-%d %H:%i:%s') as date) end as return_date,

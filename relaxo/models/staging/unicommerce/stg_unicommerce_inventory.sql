@@ -33,7 +33,11 @@ select "sku code", "item name", shelf, batch, batchstatus, type, "total (stock o
 renamed as (
 
     select
-    "sku code" as sku_code,
+     CASE
+        WHEN substr("sku code", 1, 3) IN ('A1Z', 'A1M')
+            THEN substr("sku code", 1, 19)
+        ELSE substr("sku code", 1, 18)
+    END AS sku_code,
     "item name" as item_name,
     shelf,
     batch,

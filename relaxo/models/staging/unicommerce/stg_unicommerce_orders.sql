@@ -4,7 +4,7 @@ source as (
 
     select * from {{ ref('stg_unicommerce_facility_wise_banglore') }}
 
-    UNION ALL 
+    UNION ALL  
 
     select * from {{ ref('stg_unicommerce_facility_wise_bhiwandi') }}
 
@@ -14,7 +14,7 @@ source as (
 
     UNION ALL 
 
-    select * from {{ ref('stg_unicommerce_facility_wise_gurgram') }}
+    select *  from {{ ref('stg_unicommerce_facility_wise_gurgram') }}
 
     UNION ALL 
 

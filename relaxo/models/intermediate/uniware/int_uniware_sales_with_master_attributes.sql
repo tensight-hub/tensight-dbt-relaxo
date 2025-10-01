@@ -10,12 +10,14 @@ select
 	uniware_sales.total_price,
 	uniware_sales.invoice_created,
 	1 as units_sold,
+	sku_master.sku_relaxo,
 	sku_master.brand_sku_id,
 	sku_master.sku_category,
 	sku_master.sku_sub_category,
 	sku_master.name
 from {{ ref('stg_unicommerce_orders') }} uniware_sales
+--where sale_order_status = 'COMPLETE'
 left join {{ ref('stg_product_master') }} as sku_master 
-on uniware_sales.item_sku_code = sku_master.sku_item_code
+on uniware_sales.item_sku_code = sku_master.sku_relaxo
 and lower(uniware_sales.master_mapping_channel_name) = lower(sku_master.channel)
-where sale_order_status = 'COMPLETE'
+

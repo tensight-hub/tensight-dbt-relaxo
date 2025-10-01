@@ -1,0 +1,15 @@
+SELECT 
+  category,
+  keyword AS brands,
+  COUNT(DISTINCT product_id) AS product_count,
+  CONCAT(CAST(ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 500 AND 1000 THEN TRY_CAST(discount_percent AS DOUBLE) END), 0) AS VARCHAR), '%') AS "500-1000",
+  CONCAT(CAST(ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 1000 AND 1500 THEN TRY_CAST(discount_percent AS DOUBLE) END), 0) AS VARCHAR), '%') AS "1000-1500",
+  CONCAT(CAST(ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 1500 AND 2000 THEN TRY_CAST(discount_percent AS DOUBLE) END), 0) AS VARCHAR), '%') AS "1500-2000",
+  CONCAT(CAST(ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 2000 AND 2500 THEN TRY_CAST(discount_percent AS DOUBLE) END), 0) AS VARCHAR), '%') AS "2000-2500"
+FROM {{ ref('stg_competitor_discount_analysis') }} 
+WHERE category IS NOT NULL
+  AND keyword IS NOT NULL
+  AND TRY_CAST(selling_price AS DOUBLE) IS NOT NULL
+  AND TRY_CAST(discount_percent AS DOUBLE) IS NOT NULL
+GROUP BY keyword,category
+ORDER BY product_count DESC;

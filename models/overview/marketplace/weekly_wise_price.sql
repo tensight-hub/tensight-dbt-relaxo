@@ -3,6 +3,7 @@ WITH channel_data AS (
         relaxo_sku,
         sku_category,
         sku_sub_category,
+        image_url,
         'amazon' AS channel,
          week_start,
         amazon_price AS price
@@ -12,6 +13,7 @@ WITH channel_data AS (
         relaxo_sku,
         sku_category,
         sku_sub_category,
+        image_url,
         'flipkart' AS channel,
          week_start,
         flipkart_price AS price
@@ -21,6 +23,7 @@ WITH channel_data AS (
         relaxo_sku,
         sku_category,
         sku_sub_category,
+        image_url,
         'myntra' AS channel,
          week_start,
         myntra_price AS price
@@ -30,6 +33,7 @@ WITH channel_data AS (
         relaxo_sku,
         sku_category,
         sku_sub_category,
+        image_url,
         'ajio' AS channel,
          week_start,
         ajio_price AS price
@@ -40,6 +44,7 @@ base AS (
         relaxo_sku,
         sku_category,
         sku_sub_category,
+        image_url,
         channel,
         week_start,
         price,
@@ -51,6 +56,7 @@ SELECT
      relaxo_sku,
      sku_category,
      sku_sub_category,
+     image_url,
     channel,
     date_month,
     MAX(CASE WHEN week_num = 1 THEN price END) AS week1,
@@ -61,6 +67,7 @@ FROM base
 GROUP BY
      relaxo_sku,
      sku_category,
+     image_url,
      sku_sub_category,
     channel,
     date_month

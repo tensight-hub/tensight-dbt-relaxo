@@ -1,13 +1,14 @@
 WITH InventoryDetails AS (
     SELECT  
-        ib.* ,
-        SUM(so.units_sold) AS units_sold ,
+        ib.*,
+        SUM(so.units_sold) AS units_sold,
         SUM(
           CASE
             WHEN so.created_date >= DATE_ADD('day', -30, CURRENT_DATE)
             THEN units_sold ELSE 0
           END
-        ) AS units_sold_30 ,
+        ) AS units_sold_30,
+        
         COALESCE(
           ROUND(
             SUM(
@@ -17,47 +18,7 @@ WITH InventoryDetails AS (
               END
             ) / 30.0, 
           2), 
-        0) AS ros_30,
-
-        ROUND(
-          CASE 
-            WHEN COALESCE(
-              ROUND(
-                SUM(
-                  CASE
-                    WHEN so.created_date >= DATE_ADD('day', -30, CURRENT_DATE)
-                    THEN units_sold ELSE 0
-                  END
-                ) / 30.0, 
-              2), 
-            0) = 0 THEN 0 
-            ELSE ib.soh / COALESCE(
-              ROUND(
-                SUM(
-                  CASE
-                    WHEN so.created_date >= DATE_ADD('day', -30, CURRENT_DATE)
-                    THEN units_sold ELSE 0
-                  END
-                ) / 30.0,
-              2), 
-            0)
-          END,
-        2) AS doh,
-
-        
-        (
-          (COALESCE(
-            ROUND(
-              SUM(
-                CASE
-                  WHEN so.created_date >= DATE_ADD('day', -30, CURRENT_DATE)
-                  THEN units_sold ELSE 0
-                END
-              ) / 30.0, 
-            2), 
-          0) * 45)
-          - ib.soh
-        ) AS inventory_recommendation
+        0) AS ros_30
 
     FROM
     (
@@ -75,17 +36,17 @@ WITH InventoryDetails AS (
       FROM 
       ( 
         SELECT * 
-        FROM {{ ref('stg_unicommerce_inventory') }}
-        WHERE stock_date = (SELECT MAX(stock_date) FROM {{ ref('stg_unicommerce_inventory') }})
+        FROM {{ ref("stg_unicommerce_inventory") }}
+        WHERE stock_date = (SELECT MAX(stock_date) FROM {{ ref("stg_unicommerce_inventory") }})
       ) AS a
-      LEFT JOIN {{ ref('stg_product_master') }} AS b
+      LEFT JOIN {{ ref("stg_product_master") }} AS b
       ON a.sku_code = b.sku_relaxo
       GROUP BY 1,2,3,4,5,6,7,8,9
     ) ib
     LEFT JOIN 
     (
       SELECT *, COUNT(*) AS units_sold 
-      FROM {{ ref('stg_unicommerce_orders') }}
+      FROM {{ ref("stg_unicommerce_orders") }}
       GROUP BY 1,2,3,4,5,6,7,8,9,10,
                11,12,13,14,15,16,17,18,19,20,
                21,22,23,24,25,26,27,28,29,30,
@@ -99,10 +60,22 @@ WITH InventoryDetails AS (
 )
 SELECT 
     *,
+    ROUND(
+      CASE 
+        WHEN ros_30 = 0 THEN 0
+        ELSE soh / ros_30
+      END,
+    2) AS doh,
+    
+   CASE 
+  WHEN (ros_30 * 45) - soh < 0 THEN 0
+  ELSE ROUND((ros_30 * 45) - soh, 2)
+END AS inventory_recommendation,
+    
     CASE
-        WHEN doh > 90 THEN 'overstock'
-        WHEN doh BETWEEN 45 AND 90 THEN 'instock'
-        WHEN doh < 45 THEN 'understock'
+        WHEN soh / ros_30 > 90 THEN 'overstock'
+        WHEN soh / ros_30 BETWEEN 45 AND 90 THEN 'instock'
+        WHEN soh / ros_30 < 45 THEN 'understock'
         ELSE 'N/A' 
     END AS Status
 FROM InventoryDetails;

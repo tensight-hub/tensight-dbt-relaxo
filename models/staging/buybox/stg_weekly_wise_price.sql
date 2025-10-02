@@ -16,9 +16,12 @@ sku_gender,
 amazon_price,
 flipkart_price,
 myntra_price,
-ajio_price   
+ajio_price,
+max(image_url) AS image_url
+
 
 from source
+group by 1,2,3,4,5,6,7,8,9,10,11
 
 
 )

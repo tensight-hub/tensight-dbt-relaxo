@@ -16,9 +16,11 @@ sku_gender,
 amazon_avg_rating,
 flipkart_avg_rating,
 myntra_avg_rating,
-ajio_avg_rating
+ajio_avg_rating,
+max(image_url) AS image_url
 
 from source
+group by 1,2,3,4,5,6,7,8,9,10,11
 
 
 )

@@ -21,7 +21,7 @@ TRY_CAST(discount_percent AS DOUBLE) as discount_percent,
 case when lower(product_name) like '%sandal%' then 'Sandals'
 when lower(product_name) like '%flip flop%' then 'Flip Flops'
 when lower(product_name) like '%sneakers%' then 'Sneakers'
-when lower(product_name) like '%shoes%' then 'Shoes'
+when lower(product_name) like '%shoes%' and lower(product_name) not like '%running%' and lower(product_name) not like '%casual%' then 'Shoes'
 when lower(product_name) like '%running shoes%' then 'Running Shoes'
 when lower(product_name) like '%casual shoes%' then 'Casual Shoes'
 when lower(product_name) like '%shoe%'  then 'Shoes'

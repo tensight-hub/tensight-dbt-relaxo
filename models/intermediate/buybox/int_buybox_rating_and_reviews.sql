@@ -16,6 +16,7 @@ SELECT
     rr.no_of_reviews,
     rr.avg_rating,
     rr.product_id,
+    rr.product_url,
     max(rr.image_url) as image_url
 FROM {{ ref('stg_price_parity_master') }} pp
 LEFT JOIN {{ ref('stg_product_master') }} pm
@@ -23,5 +24,5 @@ LEFT JOIN {{ ref('stg_product_master') }} pm
 LEFT JOIN {{ ref('stg_buybox_rating_and_reviews') }} rr
     ON pm.channel_sku_id = rr.product_id
 WHERE rr.scraped_date IS NOT NULL
-group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
 ORDER BY pp.relaxo_sku

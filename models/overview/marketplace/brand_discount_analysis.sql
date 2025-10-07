@@ -1,3 +1,4 @@
+/* 
 SELECT 
   category,
   keyword AS brands,
@@ -12,4 +13,29 @@ WHERE category IS NOT NULL
   AND TRY_CAST(selling_price AS DOUBLE) IS NOT NULL
   AND TRY_CAST(discount_percent AS DOUBLE) IS NOT NULL
 GROUP BY keyword,category
+ORDER BY product_count DESC;
+*/
+
+
+SELECT 
+  category,
+  keyword AS brands,
+  COUNT(DISTINCT product_id) AS product_count,
+  
+  ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 500 AND 1000 THEN TRY_CAST(mrp AS DOUBLE) END), 2) AS mrp_500_1000,
+  ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 1000 AND 1500 THEN TRY_CAST(mrp AS DOUBLE) END), 2) AS mrp_1000_1500,
+  ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 1500 AND 2000 THEN TRY_CAST(mrp AS DOUBLE) END), 2) AS mrp_1500_2000,
+  ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 2000 AND 2500 THEN TRY_CAST(mrp AS DOUBLE) END), 2) AS mrp_2000_2500,
+  
+  ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 500 AND 1000 THEN TRY_CAST(selling_price AS DOUBLE) END), 2) AS selling_price_500_1000,
+  ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 1000 AND 1500 THEN TRY_CAST(selling_price AS DOUBLE) END), 2) AS selling_price_1000_1500,
+  ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 1500 AND 2000 THEN TRY_CAST(selling_price AS DOUBLE) END), 2) AS selling_price_1500_2000,
+  ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 2000 AND 2500 THEN TRY_CAST(selling_price AS DOUBLE) END), 2) AS selling_price_2000_2500
+
+FROM {{ ref('stg_competitor_discount_analysis') }} 
+WHERE category IS NOT NULL
+  AND keyword IS NOT NULL
+  AND TRY_CAST(selling_price AS DOUBLE) IS NOT NULL
+  AND TRY_CAST(mrp AS DOUBLE) IS NOT NULL
+GROUP BY keyword, category
 ORDER BY product_count DESC;

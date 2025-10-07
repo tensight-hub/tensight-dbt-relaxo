@@ -50,7 +50,7 @@ renamed as (
         "credit note posting status" as credit_note_posting_status,
         "fwd seller order id" as fwd_seller_order_id,
         "cust order no" as customer_order_no,
-         CAST("fwd po no" AS VARCHAR) AS fwd_po_no,
+         CAST("fwd po no" AS VARCHAR) AS order_id,
          case  when "fwd po date" = 'nan' then null else cast(date_parse("fwd po date", '%a %b %d %H:%i:%s IST %Y') as date) end as fwd_po_date,
         "fwd b2b invoice no" as fwd_b2b_invoice_no,
         CAST("fwd b2b invoice date" AS DATE) AS fwd_b2b_invoice_date,

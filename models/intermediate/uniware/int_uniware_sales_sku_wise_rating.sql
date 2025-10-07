@@ -1,4 +1,4 @@
-select * from
+/* select * from
 (select distinct pp.relaxo_sku,
 units_sold as unit_sold,
 uni_sales.master_mapping_channel_name,
@@ -29,6 +29,41 @@ group by 1,2
 on pp.relaxo_sku = uni_sales.item_sku_code
 left join {{ ref('stg_product_master') }} pm
  on  uni_sales.item_sku_code = pm.sku_relaxo
+and lower(uni_sales.master_mapping_channel_name) = lower(pm.channel)
+left join {{ ref('stg_buybox_rating_and_reviews') }} rr
+on rr.product_id = pm.channel_sku_id
+and rr.source = pm.channel)
+*/
+
+
+
+select * from
+(select distinct pp.relaxo_sku,
+units_sold as unit_sold,
+uni_sales.master_mapping_channel_name,
+uni_sales.created_date,
+rr.avg_rating,
+(CASE
+        WHEN CAST(CASE WHEN lower(rr.avg_rating) = 'nan' THEN NULL ELSE rr.avg_rating END AS DECIMAL(10,2)) > 4
+        THEN 'Rating > 4'
+        WHEN CAST(CASE WHEN lower(rr.avg_rating) = 'nan' THEN NULL ELSE rr.avg_rating END AS DECIMAL(10,2)) BETWEEN 2 AND 4
+        THEN 'rating>2and<4'
+         WHEN CAST(CASE WHEN lower(rr.avg_rating) = 'nan' THEN NULL ELSE rr.avg_rating END AS DECIMAL(10,2)) <2
+        THEN  'rating<2'
+       ELSE 'No Rating'
+    END) AS rating_category,
+rr.image_url
+from  {{ ref('stg_price_parity_master') }} pp
+left join (
+select item_sku_code, master_mapping_channel_name, MAX(created_date) as created_date, sum(units_sold) units_sold from
+(select created_date, master_mapping_channel_name, item_sku_code, count(*) units_sold from {{ ref('stg_unicommerce_orders') }}
+group by 1,2,3)
+where lower(master_mapping_channel_name) in ('ajio','myntra','flipkart','amazon')
+group by 1,2
+) uni_sales
+on pp.relaxo_sku = uni_sales.item_sku_code
+left join {{ ref('stg_product_master') }} pm
+ on uni_sales.item_sku_code = pm.sku_relaxo
 and lower(uni_sales.master_mapping_channel_name) = lower(pm.channel)
 left join {{ ref('stg_buybox_rating_and_reviews') }} rr
 on rr.product_id = pm.channel_sku_id

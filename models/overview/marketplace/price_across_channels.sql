@@ -67,7 +67,11 @@ SELECT
     {{ channel_price('source', 'product_price', 'amazon', 'amazon_price') }},
     {{ channel_price('source', 'product_price', 'flipkart', 'flipkart_price') }},
     {{ channel_price('source', 'product_price', 'myntra', 'myntra_price') }},
-    {{ channel_price('source', 'product_price', 'Ajio', 'ajio_price') }}
+    {{ channel_price('source', 'product_price', 'Ajio', 'ajio_price') }},
+    MAX(CASE WHEN source = 'amazon' THEN product_url END) AS amazon_url,
+    MAX(CASE WHEN source = 'flipkart' THEN product_url END) AS flipkart_url,
+    MAX(CASE WHEN source = 'myntra' THEN product_url END) AS myntra_url,
+    MAX(CASE WHEN source = 'Ajio' THEN product_url END) AS ajio_url
 
 from 
 {{ ref('int_buybox_rating_and_reviews') }}

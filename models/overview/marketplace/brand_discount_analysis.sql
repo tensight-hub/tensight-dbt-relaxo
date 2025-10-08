@@ -20,6 +20,7 @@ ORDER BY product_count DESC;
 SELECT 
   category,
   keyword AS brands,
+  platform as channel,
   COUNT(DISTINCT product_id) AS product_count,
   
   ROUND(AVG(CASE WHEN TRY_CAST(selling_price AS DOUBLE) BETWEEN 500 AND 1000 THEN TRY_CAST(mrp AS DOUBLE) END), 2) AS mrp_500_1000,
@@ -37,5 +38,5 @@ WHERE category IS NOT NULL
   AND keyword IS NOT NULL
   AND TRY_CAST(selling_price AS DOUBLE) IS NOT NULL
   AND TRY_CAST(mrp AS DOUBLE) IS NOT NULL
-GROUP BY keyword, category
+GROUP BY keyword, category,platform
 ORDER BY product_count DESC;

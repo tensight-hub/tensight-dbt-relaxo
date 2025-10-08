@@ -1,6 +1,6 @@
 with source as (
   select *
-  from {{ source('buybox_overview', 'price_across_channels') }}
+  from {{ source('buybox_overview', 'price_across_channels_latest_date') }}
 ),
 renamed as (
   select  
@@ -17,11 +17,15 @@ amazon_price,
 flipkart_price,
 myntra_price,
 ajio_price,
+amazon_url,
+flipkart_url,
+myntra_url,
+ajio_url,
 max(image_url) AS image_url
 
 
 from source
-group by 1,2,3,4,5,6,7,8,9,10,11
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
 
 
 )

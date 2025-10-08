@@ -24,7 +24,12 @@ SELECT * FROM (
         MAX(CASE
             WHEN rr.source = 'Ajio'
             THEN CASE WHEN lower(rr.seller_name) = 'nan' THEN '' ELSE rr.seller_name END
-        END) AS ajio
+        END) AS ajio,
+    MAX(CASE WHEN source = 'amazon' THEN product_url END) AS amazon_url,
+    MAX(CASE WHEN source = 'flipkart' THEN product_url END) AS flipkart_url,
+    MAX(CASE WHEN source = 'myntra' THEN product_url END) AS myntra_url,
+    MAX(CASE WHEN source = 'Ajio' THEN product_url END) AS ajio_url
+
     FROM
     {{ ref('stg_price_parity_master') }} pp
 LEFT JOIN

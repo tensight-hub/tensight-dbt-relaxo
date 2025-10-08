@@ -65,7 +65,12 @@ ORDER BY
     {{ channel_reviews('source', 'no_of_reviews', 'amazon', 'amazon_review_count') }},
     {{ channel_reviews('source', 'no_of_reviews', 'flipkart', 'flipkart_review_count') }},
     {{ channel_reviews('source', 'no_of_reviews', 'myntra', 'myntra_review_count') }},
-    {{ channel_reviews('source', 'no_of_reviews', 'Ajio', 'ajio_review_count') }}
+    {{ channel_reviews('source', 'no_of_reviews', 'Ajio', 'ajio_review_count') }},
+     MAX(CASE WHEN source = 'amazon' THEN product_url END) AS amazon_url,
+    MAX(CASE WHEN source = 'flipkart' THEN product_url END) AS flipkart_url,
+    MAX(CASE WHEN source = 'myntra' THEN product_url END) AS myntra_url,
+    MAX(CASE WHEN source = 'Ajio' THEN product_url END) AS ajio_url
+
 
 from 
 {{ ref('int_buybox_rating_and_reviews') }}

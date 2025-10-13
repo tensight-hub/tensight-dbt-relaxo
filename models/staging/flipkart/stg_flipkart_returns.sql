@@ -43,8 +43,18 @@ renamed as (
         'Flipkart' AS channel_name
 
 
-        from source)
+        from source
 
-select * from renamed
+),
 
+final as (
+
+    select
+        *, 
+        CONCAT(channel_sku_code, '_', order_id) AS channel_sku_order_id 
+    from renamed
+
+)
+
+select * from final
 

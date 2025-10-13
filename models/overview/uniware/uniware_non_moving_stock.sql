@@ -3,7 +3,7 @@ SELECT
     facility_code,
     soh,
     units_sold_30,
+    units_sold_60,
+    units_sold_90,
     stock_date
-    FROM {{ ref('inventory_sales_combined') }}
-WHERE soh > 0
-AND units_sold_30 = 0
+    FROM {{ ref('uniware_inventory_sales_report') }}

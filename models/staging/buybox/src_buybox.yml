@@ -13,6 +13,8 @@ sources:
       - name: price_across_channels_latest_date
       - name: rating_across_channels_latest_date
       - name: review_across_channels_latest_date
+      - name: stock_availability_latest_date
+      
       
 
        

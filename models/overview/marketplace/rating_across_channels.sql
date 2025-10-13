@@ -70,6 +70,9 @@ ORDER BY
     MAX(CASE WHEN source = 'myntra' THEN product_url END) AS myntra_url,
     MAX(CASE WHEN source = 'Ajio' THEN product_url END) AS ajio_url
 
+
+    
+
 from 
 {{ ref('int_buybox_rating_and_reviews') }}
 

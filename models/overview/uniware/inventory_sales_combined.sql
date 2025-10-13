@@ -9,6 +9,20 @@ WITH InventoryDetails AS (
             THEN units_sold ELSE 0
           END
         ) AS units_sold_30,
+
+        SUM(
+         CASE
+    WHEN so.created_date >= DATE_ADD('day', -60, CURRENT_DATE)
+    THEN units_sold ELSE 0
+  END
+) AS units_sold_60,
+
+SUM(
+  CASE
+    WHEN so.created_date >= DATE_ADD('day', -90, CURRENT_DATE)
+    THEN units_sold ELSE 0
+  END
+) AS units_sold_90,
         
         COALESCE(
           ROUND(
@@ -33,7 +47,7 @@ WITH InventoryDetails AS (
           b.sku_size,
           b.sku_gender,
           a.stock_date,
-          SUM(a.available_atp) AS soh
+          a.available_atp as soh
       FROM 
       ( 
         SELECT * 
@@ -42,7 +56,7 @@ WITH InventoryDetails AS (
       ) AS a
       LEFT JOIN {{ ref("stg_product_master") }} AS b
       ON a.sku_code = b.sku_relaxo
-      GROUP BY 1,2,3,4,5,6,7,8,9
+      GROUP BY 1,2,3,4,5,6,7,8,9,10
     ) ib
     LEFT JOIN 
     (

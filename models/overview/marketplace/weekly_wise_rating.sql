@@ -4,6 +4,7 @@ WITH channel_data AS (
         sku_category,
         sku_sub_category,
         image_url,
+        amazon_url AS product_url,
         'amazon' AS channel,
          week_start,
         amazon_avg_rating AS rating
@@ -14,6 +15,7 @@ WITH channel_data AS (
         sku_category,
         sku_sub_category,
         image_url,
+        flipkart_url AS product_url,
         'flipkart' AS channel,
          week_start,
         flipkart_avg_rating AS rating
@@ -24,6 +26,7 @@ WITH channel_data AS (
         sku_category,
         sku_sub_category,
         image_url,
+        myntra_url AS product_url,
         'myntra' AS channel,
          week_start,
         myntra_avg_rating AS rating
@@ -34,6 +37,7 @@ WITH channel_data AS (
         sku_category,
         sku_sub_category,
         image_url,
+        ajio_url AS product_url,
         'ajio' AS channel,
          week_start,
         ajio_avg_rating AS rating
@@ -45,6 +49,7 @@ base AS (
         sku_category,
         sku_sub_category,
         image_url,
+        product_url,
         channel,
         week_start,
         rating,
@@ -56,8 +61,9 @@ SELECT
      relaxo_sku,
      sku_category,
      sku_sub_category,
-        image_url,
+    image_url,
     channel,
+    product_url,
     date_month,
     MAX(CASE WHEN week_num = 1 THEN rating END) AS week1,
     MAX(CASE WHEN week_num = 2 THEN rating END) AS week2,
@@ -69,6 +75,7 @@ GROUP BY
      sku_category,
      sku_sub_category,
         image_url,
+        product_url,
     channel,
     date_month
 ORDER BY

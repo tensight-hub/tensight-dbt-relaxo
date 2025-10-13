@@ -118,6 +118,17 @@ renamed as (
 
 
    
- from source)
+  from source
 
-select * from renamed
+),
+
+final as (
+
+    select
+        *, 
+        CONCAT(product_sku_code, '_', sale_order_number) AS channel_uniware_order_id 
+    from renamed
+
+)
+
+select * from final

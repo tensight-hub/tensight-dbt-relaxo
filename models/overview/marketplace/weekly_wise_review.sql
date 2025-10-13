@@ -5,6 +5,7 @@ WITH channel_data AS (
         sku_sub_category,
         image_url,
         'amazon' AS channel,
+        amazon_url AS product_url,
          week_start,
         amazon_review_count AS review
     FROM  {{ ref("stg_weekly_wise_review") }}
@@ -15,6 +16,7 @@ WITH channel_data AS (
         sku_sub_category,
         image_url,
         'flipkart' AS channel,
+        flipkart_url AS product_url,
          week_start,
         flipkart_review_count AS review
     FROM {{ ref("stg_weekly_wise_review") }}
@@ -25,6 +27,7 @@ WITH channel_data AS (
         sku_sub_category,
         image_url,
         'myntra' AS channel,
+        myntra_url AS product_url,
          week_start,
         myntra_review_count AS review
     FROM {{ ref("stg_weekly_wise_review") }}
@@ -35,6 +38,7 @@ WITH channel_data AS (
         sku_sub_category,
         image_url,
         'ajio' AS channel,
+        ajio_url AS product_url,
          week_start,
         ajio_review_count AS review
     FROM {{ ref("stg_weekly_wise_review") }}
@@ -46,6 +50,7 @@ base AS (
         sku_sub_category,
         image_url,
         channel,
+        product_url,
         week_start,
         review,
         date_format(week_start, '%m-%Y') AS date_month,
@@ -58,6 +63,7 @@ SELECT
      sku_sub_category,
         image_url,
     channel,
+    product_url,
     date_month,
     MAX(CASE WHEN week_num = 1 THEN review END) AS week1,
     MAX(CASE WHEN week_num = 2 THEN review END) AS week2,
@@ -70,6 +76,7 @@ GROUP BY
      sku_sub_category,
         image_url,
     channel,
+    product_url,
     date_month
 ORDER BY
     relaxo_sku,

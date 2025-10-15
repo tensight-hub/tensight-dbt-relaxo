@@ -27,16 +27,7 @@ SELECT distinct
 
 
 
---FROM
- --   {{ ref('stg_price_parity_master') }} pp
---LEFT JOIN
-   -- {{ ref('stg_product_master') }} pm 
-   --    ON pp.relaxo_sku = pm.sku_relaxo
---LEFT JOIN
-   --  {{ ref('stg_buybox_rating_and_reviews') }} rr 
-   -- ON pm.channel_sku_id = rr.product_id
---WHERE
-    --rr.scraped_date IS NOT NULL
+
 
 
 

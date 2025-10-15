@@ -18,19 +18,9 @@ TRY_CAST(mrp AS DOUBLE) as mrp,
 TRY_CAST(selling_price AS DOUBLE) as selling_price,
 TRY_CAST(discount_percent AS DOUBLE) as discount_percent,
 "product image link" as product_image_link,
-case when lower(product_name) like '%sandal%' then 'Sandals'
-when lower(product_name) like '%flip flop%' then 'Flip Flops'
-when lower(product_name) like '%sneakers%' then 'Sneakers'
-when lower(product_name) like '%shoes%' and lower(product_name) not like '%running%' and lower(product_name) not like '%casual%' then 'Shoes'
-when lower(product_name) like '%running shoes%' then 'Running Shoes'
-when lower(product_name) like '%casual shoes%' then 'Casual Shoes'
-when lower(product_name) like '%shoe%'  then 'Shoes'
-when lower(product_name)  like '%slipper%' then 'Slipper'
-when lower(product_name) like '%clogs%' then 'Clogs'
-when lower(product_name)  like '%slip on%'then 'slip on'
-end as category
+ {{ categorize_product('product_name') }} as category
 
  
-from source
+from source 
 )
 select * from renamed;

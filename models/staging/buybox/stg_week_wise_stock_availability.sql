@@ -1,6 +1,6 @@
 with source as (
   select *
-  from {{ source('buybox_overview', 'stock_availability_latest_date') }}
+  from {{ source('buybox_overview', 'product_availability_latest_month') }}
 ),
 renamed as (
   select  

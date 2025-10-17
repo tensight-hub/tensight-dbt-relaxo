@@ -182,21 +182,21 @@ WITH InventoryDetails AS (
         SUM(
           CASE
             WHEN so.created_date >= DATE_ADD('day', -30, CURRENT_DATE)
-            THEN so.units_sold ELSE 0  -- Fixed: so.units_sold
+            THEN so.units_sold ELSE 0  
           END
         ) AS units_sold_30,
 
         SUM(
          CASE
     WHEN so.created_date >= DATE_ADD('day', -60, CURRENT_DATE)
-    THEN so.units_sold ELSE 0  -- Fixed: so.units_sold
+    THEN so.units_sold ELSE 0 
   END
 ) AS units_sold_60,
 
 SUM(
   CASE
     WHEN so.created_date >= DATE_ADD('day', -90, CURRENT_DATE)
-    THEN so.units_sold ELSE 0  -- Fixed: so.units_sold
+    THEN so.units_sold ELSE 0  
   END
 ) AS units_sold_90
 

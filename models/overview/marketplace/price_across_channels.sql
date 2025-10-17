@@ -72,7 +72,43 @@ SELECT
     {{ channel_product_url('source', 'product_url', 'amazon', 'amazon_url') }},
     {{ channel_product_url('source', 'product_url', 'flipkart', 'flipkart_url') }},
     {{ channel_product_url('source', 'product_url', 'myntra', 'myntra_url') }},
-    {{ channel_product_url('source', 'product_url', 'Ajio', 'ajio_url') }}
+    {{ channel_product_url('source', 'product_url', 'Ajio', 'ajio_url') }},
+    
+    MAX(
+        CASE WHEN lower(source) = 'amazon'
+        THEN CAST(
+            CASE WHEN lower(mrp) = 'nan' THEN '0' ELSE mrp END
+            AS DECIMAL(10, 2)
+        )
+    END
+    ) AS amazon_mrp,
+
+    MAX(
+        CASE WHEN lower(source) = 'flipkart'
+        THEN CAST(
+            CASE WHEN lower(mrp) = 'nan' THEN '0' ELSE mrp END
+            AS DECIMAL(10, 2)
+        )
+    END
+    ) AS flipkart_mrp,
+
+    MAX(
+        CASE WHEN lower(source) = 'myntra'
+        THEN CAST(
+            CASE WHEN lower(mrp) = 'nan' THEN '0' ELSE mrp END
+            AS DECIMAL(10, 2)
+        )
+    END
+    ) AS myntra_mrp,
+
+    MAX(
+        CASE WHEN lower(source) = 'ajio'
+        THEN CAST(
+            CASE WHEN lower(mrp) = 'nan' THEN '0' ELSE mrp END
+            AS DECIMAL(10, 2)
+        )
+    END
+    ) AS ajio_mrp
 
 from 
 {{ ref('int_buybox_rating_and_reviews') }}

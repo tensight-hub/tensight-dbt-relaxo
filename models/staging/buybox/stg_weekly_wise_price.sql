@@ -1,6 +1,6 @@
 with source as (
   select *
-  from {{ source('buybox_overview', 'price_across_channels_latest_date') }}
+  from {{ source('buybox_overview', 'price_across_channels_latest_month') }}
 ),
 renamed as (
   select  
@@ -30,3 +30,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
 
 )
 select * from renamed;
+
+
+
+

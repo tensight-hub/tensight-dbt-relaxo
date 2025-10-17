@@ -10,10 +10,10 @@ sources:
   - name: buybox_overview
     schema: custom_tensight_relaxo_agg_prod_overview
     tables:
-      - name: price_across_channels_latest_date
-      - name: rating_across_channels_latest_date
-      - name: review_across_channels_latest_date
-      - name: stock_availability_latest_date
+      - name: price_across_channels_latest_month
+      - name: rating_across_channels_latest_month
+      - name: review_across_channels_latest_month
+      - name: product_availability_latest_month
       
       
 

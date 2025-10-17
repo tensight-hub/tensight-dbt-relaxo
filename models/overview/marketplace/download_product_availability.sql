@@ -15,8 +15,8 @@ SELECT
     source,
     product_id,
     CASE
-        WHEN is_sold_out = 'TRUE' THEN 'Out of Stock'
-        WHEN is_sold_out = 'FALSE' THEN 'In Stock'
+        WHEN LOWER(is_sold_out) = 'true' THEN 'Out of Stock'
+        WHEN LOWER(is_sold_out) = 'false' THEN 'In Stock'
         ELSE 'Unknown' 
     END AS status 
 FROM LatestDateWiseSoldOutStatus

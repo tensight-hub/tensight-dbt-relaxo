@@ -91,7 +91,7 @@ from  {{ ref('stg_price_parity_master') }} pp
 left join (
 select item_sku_code , master_mapping_channel_name, sum(units_sold) units_sold from
 (select *,count(*) units_sold from {{ ref('stg_unicommerce_orders') }}
-where order_date >= current_date - interval '30' day
+where created_date >= current_date - interval '30' day
 group by 1,2,3,4,5,6,7,8,9,10,
 11,12,13,14,15,16,17,18,19,20,
 21,22,23,24,25,26,27,28,29,30,

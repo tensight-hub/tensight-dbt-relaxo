@@ -1,63 +1,78 @@
 WITH channel_data AS (
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         amazon_url AS product_url,   
         'amazon' AS channel,
         week_start,
-        amazon_price AS price
+        max(image_url) as image_url,
+        max(amazon_price)  AS price
     FROM {{ ref("stg_weekly_wise_price") }}
+    where amazon_price is not null
+    group by 1,2,3,4,5,6,7
+    
 
     UNION ALL
 
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         flipkart_url AS product_url, 
         'flipkart' AS channel,
         week_start,
-        flipkart_price AS price
+        max(image_url) as image_url,
+        max(flipkart_price) AS price
     FROM {{ ref("stg_weekly_wise_price") }}
+        WHERE flipkart_price is not null
+    group by 1,2,3,4,5,6,7
 
     UNION ALL
 
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         myntra_url AS product_url,   
         'myntra' AS channel,
         week_start,
-        myntra_price AS price
+        max(image_url) as image_url,
+        max(myntra_price) AS price
     FROM {{ ref("stg_weekly_wise_price") }}
+        WHERE myntra_price is not null
+    group by 1,2,3,4,5,6,7
 
     UNION ALL
 
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         ajio_url AS product_url,     
         'ajio' AS channel,
         week_start,
-        ajio_price AS price
+        max(image_url) as image_url,
+        max(ajio_price) AS price
     FROM {{ ref("stg_weekly_wise_price") }}
+        WHERE ajio_price is not null
+    group by 1,2,3,4,5,6,7
+
 ),
 
 base AS (
-    SELECT
+    SELECT DISTINCT
         relaxo_sku,
         sku_category,
         sku_sub_category,
         image_url,
         product_url,                  
         channel,
+        scraped_date,
         week_start,
         price,
         date_format(week_start, '%m-%Y') AS date_month,

@@ -1,47 +1,63 @@
 WITH channel_data AS (
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         amazon_url AS product_url,
         'amazon' AS channel,
          week_start,
-        amazon_avg_rating AS rating
+         max(image_url) image_url,
+        max(amazon_avg_rating) AS rating
     FROM  {{ ref("stg_weekly_wise_rating") }}
+    WHERE amazon_avg_rating IS NOT NULL
+    group by 1,2,3,4,5,6,7
+    
     UNION ALL
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         flipkart_url AS product_url,
         'flipkart' AS channel,
          week_start,
-        flipkart_avg_rating AS rating
+        max(image_url) image_url,
+        max(flipkart_avg_rating) AS rating
     FROM {{ ref("stg_weekly_wise_rating") }}
+    WHERE flipkart_avg_rating IS NOT NULL
+    group by 1,2,3,4,5,6,7
+    
     UNION ALL
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         myntra_url AS product_url,
         'myntra' AS channel,
          week_start,
-        myntra_avg_rating AS rating
+         max(image_url) image_url,
+        max(myntra_avg_rating) AS rating
     FROM {{ ref("stg_weekly_wise_rating") }}
+    WHERE myntra_avg_rating IS NOT NULL
+    group by 1,2,3,4,5,6,7
+    
     UNION ALL
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         ajio_url AS product_url,
         'ajio' AS channel,
          week_start,
-        ajio_avg_rating AS rating
-    FROM {{ ref("stg_weekly_wise_rating") }}
+         max(image_url) image_url,
+        max(ajio_avg_rating) AS rating
+        FROM {{ ref("stg_weekly_wise_rating") }}
+    WHERE ajio_avg_rating IS NOT NULL
+    group by 1,2,3,4,5,6,7
+    
 ),
 base AS (
     SELECT
@@ -51,6 +67,7 @@ base AS (
         image_url,
         product_url,
         channel,
+        scraped_date,
         week_start,
         rating,
         date_format(week_start, '%m-%Y') AS date_month,

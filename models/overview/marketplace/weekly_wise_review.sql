@@ -1,47 +1,59 @@
 WITH channel_data AS (
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         'amazon' AS channel,
         amazon_url AS product_url,
          week_start,
-        amazon_review_count AS review
+         max(image_url) image_url,
+         max(amazon_review_count ) AS review
     FROM  {{ ref("stg_weekly_wise_review") }}
+    WHERE amazon_review_count IS NOT NULL
+    GROUP BY 1,2,3,4,5,6,7
     UNION ALL
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         'flipkart' AS channel,
         flipkart_url AS product_url,
          week_start,
-        flipkart_review_count AS review
+          max(image_url) image_url,
+        max(flipkart_review_count) AS review
     FROM {{ ref("stg_weekly_wise_review") }}
+    WHERE flipkart_review_count IS NOT NULL
+    GROUP BY 1,2,3,4,5,6,7
     UNION ALL
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         'myntra' AS channel,
         myntra_url AS product_url,
          week_start,
-        myntra_review_count AS review
+        max(image_url) image_url,
+        max(myntra_review_count) AS review
     FROM {{ ref("stg_weekly_wise_review") }}
+    WHERE myntra_review_count IS NOT NULL
+    GROUP BY 1,2,3,4,5,6,7
     UNION ALL
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         'ajio' AS channel,
         ajio_url AS product_url,
          week_start,
-        ajio_review_count AS review
+        max(image_url) image_url,
+        max(ajio_review_count) AS review
     FROM {{ ref("stg_weekly_wise_review") }}
+    WHERE ajio_review_count IS NOT NULL
+    GROUP BY 1,2,3,4,5,6,7
 ),
 base AS (
     SELECT
@@ -50,6 +62,7 @@ base AS (
         sku_sub_category,
         image_url,
         channel,
+        scraped_date,
         product_url,
         week_start,
         review,
@@ -58,10 +71,10 @@ base AS (
     FROM channel_data
 )
 SELECT
-     relaxo_sku,
-     sku_category,
-     sku_sub_category,
-        image_url,
+    relaxo_sku,
+    sku_category,
+    sku_sub_category,
+    image_url,
     channel,
     product_url,
     date_month,

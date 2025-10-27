@@ -3,9 +3,8 @@ with source as (
   from {{ source('buybox_overview', 'review_across_channels_latest_month') }}
 ),
 renamed as (
-  select  
-
-
+  select distinct
+scraped_date,
 date_trunc('week', date_parse(scraped_date, '%Y-%m-%d')) AS week_start,
 relaxo_sku,
 sku_category,
@@ -17,16 +16,13 @@ amazon_review_count,
 flipkart_review_count,
 myntra_review_count,
 ajio_review_count,
-amazon_url,
-flipkart_url,
-myntra_url,
-ajio_url,
-max(image_url) AS image_url
+image_url,
+max(amazon_url)  OVER () AS amazon_url,
+max(flipkart_url) OVER () AS flipkart_url,
+max(myntra_url)   OVER () AS myntra_url,
+max(ajio_url)     OVER () AS ajio_url
+    
+    FROM source
 
-from source
-
-group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-
-
-)
+    )
 select * from renamed;

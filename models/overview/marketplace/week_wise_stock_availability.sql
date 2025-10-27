@@ -1,53 +1,65 @@
 WITH channel_data AS (
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         amazon_url AS product_url,   
         'amazon' AS channel,
         week_start,
-        amazon_stock_availability AS stock_availability
+        max(image_url) as image_url,
+        max(amazon_stock_availability) AS stock_availability
     FROM {{ ref("stg_week_wise_stock_availability") }}
+        where amazon_stock_availability is not null
+    group by 1,2,3,4,5,6,7
 
     UNION ALL
 
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         flipkart_url AS product_url, 
         'flipkart' AS channel,
         week_start,
-        flipkart_stock_availability AS stock_availability
+        max(image_url) as image_url,
+        max(flipkart_stock_availability) AS stock_availability
     FROM {{ ref("stg_week_wise_stock_availability") }}
+        WHERE flipkart_stock_availability is not null
+    group by 1,2,3,4,5,6,7
 
     UNION ALL
 
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         myntra_url AS product_url,   
         'myntra' AS channel,
         week_start,
-        myntra_stock_availability AS stock_availability
+        max(image_url) as image_url,
+        max(myntra_stock_availability) AS stock_availability
     FROM {{ ref("stg_week_wise_stock_availability") }}
+        WHERE myntra_stock_availability is not null
+    group by 1,2,3,4,5,6,7
 
     UNION ALL
 
     SELECT
+        scraped_date,
         relaxo_sku,
         sku_category,
         sku_sub_category,
-        image_url,
         ajio_url AS product_url,     
         'ajio' AS channel,
         week_start,
-        ajio_stock_availability AS stock_availability
+        max(image_url) as image_url,
+        max(ajio_stock_availability) AS stock_availability
     FROM {{ ref("stg_week_wise_stock_availability") }}
+        WHERE ajio_stock_availability is not null
+    group by 1,2,3,4,5,6,7
 ),
 
 base AS (
@@ -58,6 +70,7 @@ base AS (
         image_url,
         product_url,                  
         channel,
+        scraped_date,   
         week_start,
         stock_availability,
         date_format(week_start, '%m-%Y') AS date_month,

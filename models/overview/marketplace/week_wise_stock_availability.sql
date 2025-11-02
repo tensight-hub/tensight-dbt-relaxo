@@ -74,7 +74,7 @@ base AS (
         week_start,
         stock_availability,
         date_format(week_start, '%m-%Y') AS date_month,
-        row_number() OVER (PARTITION BY relaxo_sku, channel ORDER BY week_start) AS week_num
+        row_number() OVER (PARTITION BY relaxo_sku, channel ORDER BY scraped_date) AS week_num
     FROM channel_data
 )
 

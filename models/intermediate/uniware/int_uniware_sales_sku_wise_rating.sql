@@ -113,6 +113,6 @@ left join (
         from {{ ref('stg_buybox_rating_and_reviews') }}
     )
 ) rr
-on rr.product_id = pm.channel_sku_id
-and rr.source = pm.channel
+on lower(rr.product_id) = lower(pm.channel_sku_id)
+and lower(rr.source) = lower(pm.channel)
 )

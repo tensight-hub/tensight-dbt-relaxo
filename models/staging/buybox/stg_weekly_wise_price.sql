@@ -6,7 +6,7 @@ renamed as (
   select distinct  
 
 scraped_date,
-date_trunc('week', date_parse(scraped_date, '%Y-%m-%d')) AS week_start,
+ date_add('day', -1, date_trunc('week', date_add('day', 1, date_parse(scraped_date, '%Y-%m-%d')))) AS week_start,
 relaxo_sku,
 sku_category,
 sku_sub_category,

@@ -2,6 +2,7 @@
 
 SELECT
     pp.relaxo_sku,
+    pp.tagging,
     pm.sku_relaxo,
     pm.channel_sku_id,
     pm.sku_category,
@@ -23,8 +24,9 @@ SELECT
 FROM {{ ref('stg_price_parity_master') }} pp
 LEFT JOIN {{ ref('stg_product_master') }} pm
     ON pp.relaxo_sku = pm.sku_relaxo
+    and lower(pm.tagging) = lower(pp.tagging)
 LEFT JOIN {{ ref('stg_buybox_rating_and_reviews') }} rr
     ON pm.channel_sku_id = rr.product_id
 WHERE rr.scraped_date IS NOT NULL
-group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 ORDER BY pp.relaxo_sku

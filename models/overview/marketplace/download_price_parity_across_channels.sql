@@ -6,6 +6,7 @@ WITH LatestPrices AS (
         product_id,
         mrp,
         product_price,
+        tagging,
         ROW_NUMBER() OVER(PARTITION BY relaxo_sku, source, product_id ORDER BY scraped_date DESC) as rn
    from 
 {{ ref('int_buybox_rating_and_reviews') }}
@@ -16,6 +17,7 @@ SELECT
     source,
     product_id,
     mrp,
-    product_price
+    product_price,
+    tagging
 FROM LatestPrices
 WHERE rn = 1;

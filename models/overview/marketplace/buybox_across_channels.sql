@@ -3,6 +3,7 @@ SELECT * FROM (
     SELECT
     rr.scraped_date,
     pp.relaxo_sku,
+    pp.tagging,
     pm.sku_category,
     pm.sku_sub_category,
     pm.name,
@@ -44,6 +45,7 @@ LEFT JOIN
     pm.name,
     rr.scraped_date,
     pp.relaxo_sku,
+    pp.tagging,
     pm.sku_category,
     pm.sku_sub_category,
     pm.sku_size,

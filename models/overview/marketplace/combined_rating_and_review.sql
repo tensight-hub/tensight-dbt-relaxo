@@ -2,6 +2,7 @@
 SELECT
     rr.scraped_date,
     pp.relaxo_sku,
+    pp.tagging,
     pm.name,
     pm.sku_category,
     pm.sku_sub_category,
@@ -47,6 +48,7 @@ GROUP BY
     rr.scraped_date,
     pm.name,
     pp.relaxo_sku,
+    pp.tagging,
     pm.sku_category,
     pm.sku_sub_category,
     pm.sku_size,
@@ -57,6 +59,7 @@ UNION ALL
 SELECT
     rr.scraped_date,
     pp.relaxo_sku,
+    pp.tagging,
     pm.name,
     pm.sku_category,
     pm.sku_sub_category,
@@ -100,6 +103,7 @@ GROUP BY
     pm.name,
     rr.scraped_date,
     pp.relaxo_sku,
+    pp.tagging,
     pm.sku_category,
     pm.sku_sub_category,
     pm.sku_size,

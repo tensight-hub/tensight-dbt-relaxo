@@ -211,6 +211,7 @@ SUM(
           b.name,
           b.sku_size,
           b.sku_gender,
+          b.sub_brand,
           a.stock_date,
           a.available_atp AS soh
       FROM 
@@ -221,7 +222,7 @@ SUM(
       ) AS a
       LEFT JOIN {{ ref("stg_product_master") }} AS b
       ON a.sku_code = b.sku_relaxo
-      GROUP BY 1,2,3,4,5,6,7,8,9,10
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11
     ) ib
     LEFT JOIN 
     (
@@ -231,7 +232,7 @@ SUM(
     ) so
     ON ib.sku_code = so.item_sku_code
     AND ib.facility_code = so.facility_code
-    GROUP BY 1,2,3,4,5,6,7,8,9,10,11
+    GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
 )
 SELECT * FROM InventoryDetails;
 

@@ -1,6 +1,7 @@
 SELECT
     scraped_date,
     relaxo_sku,
+    tagging,
     sku_category,
     sku_sub_category,
     name,
@@ -52,6 +53,7 @@ GROUP BY
     name,
     scraped_date,
     relaxo_sku,
+    tagging,
     sku_category,
     sku_sub_category,
     sku_size,

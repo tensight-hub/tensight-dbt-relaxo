@@ -13,7 +13,8 @@ renamed as (
     "amazon asin" as amazon_asin,
     "flipkart fsn" as flipkart_fsn,
     "myntra id" as myntra_id,
-    "ajio id" as ajio_id
+    "ajio id" as ajio_id,
+     tagging
 
       
         

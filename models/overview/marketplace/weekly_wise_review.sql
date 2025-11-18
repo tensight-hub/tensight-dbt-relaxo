@@ -1,4 +1,4 @@
-WITH channel_data AS (
+/*WITH channel_data AS (
     SELECT
         scraped_date,
         relaxo_sku,
@@ -94,3 +94,112 @@ GROUP BY
 ORDER BY
     relaxo_sku,
     channel;
+
+    */
+
+
+    WITH channel_data AS (
+    SELECT
+        scraped_date,
+        relaxo_sku,
+        tagging,
+        sku_category,
+        sku_sub_category,
+        'amazon' AS channel,
+        amazon_url AS product_url,
+         week_start,
+         max(image_url) image_url,
+         max(amazon_review_count ) AS review
+    FROM  {{ ref("stg_weekly_wise_review") }}
+    WHERE amazon_review_count IS NOT NULL
+    GROUP BY 1,2,3,4,5,6,7,8
+    UNION ALL
+    SELECT
+        scraped_date,
+        relaxo_sku,
+        tagging,
+        sku_category,
+        sku_sub_category,
+        'flipkart' AS channel,
+        flipkart_url AS product_url,
+         week_start,
+          max(image_url) image_url,
+        max(flipkart_review_count) AS review
+    FROM {{ ref("stg_weekly_wise_review") }}
+    WHERE flipkart_review_count IS NOT NULL
+    GROUP BY 1,2,3,4,5,6,7,8
+    UNION ALL
+    SELECT
+        scraped_date,
+        relaxo_sku,
+        tagging,
+        sku_category,
+        sku_sub_category,
+        'myntra' AS channel,
+        myntra_url AS product_url,
+         week_start,
+        max(image_url) image_url,
+        max(myntra_review_count) AS review
+    FROM {{ ref("stg_weekly_wise_review") }}
+    WHERE myntra_review_count IS NOT NULL
+    GROUP BY 1,2,3,4,5,6,7,8
+    UNION ALL
+    SELECT
+        scraped_date,
+        relaxo_sku,
+        tagging,
+        sku_category,
+        sku_sub_category,
+        'ajio' AS channel,
+        ajio_url AS product_url,
+         week_start,
+        max(image_url) image_url,
+        max(ajio_review_count) AS review
+    FROM {{ ref("stg_weekly_wise_review") }}
+    WHERE ajio_review_count IS NOT NULL
+    GROUP BY 1,2,3,4,5,6,7,8
+),
+base AS (
+    SELECT
+        relaxo_sku,
+        tagging,
+        sku_category,
+        sku_sub_category,
+        image_url,
+        channel,
+        scraped_date,
+        product_url,
+        week_start,
+        review,
+        date_format(week_start, '%m-%Y') AS date_month,
+         EXTRACT(week FROM week_start) - EXTRACT(week FROM DATE_TRUNC('month', week_start)) + 1 AS calendar_week_num
+    FROM channel_data
+)
+SELECT
+    relaxo_sku,
+    tagging,
+    sku_category,
+    sku_sub_category,
+    image_url,
+    channel,
+    product_url,
+    date_month,
+    MAX(CASE WHEN calendar_week_num = 1 THEN review END) AS week1,
+    MAX(CASE WHEN calendar_week_num = 2 THEN review END) AS week2,
+    MAX(CASE WHEN calendar_week_num = 3 THEN review END) AS week3,
+    MAX(CASE WHEN calendar_week_num = 4 THEN review END) AS week4
+FROM base
+GROUP BY
+     relaxo_sku,
+        tagging,
+     sku_category,
+     sku_sub_category,
+        image_url,
+    channel,
+    product_url,
+    date_month
+ORDER BY
+    relaxo_sku,
+    channel;
+
+    

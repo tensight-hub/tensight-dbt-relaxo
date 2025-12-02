@@ -189,6 +189,7 @@
             scraped_date,
             week_start,
             price,
+            format_datetime(date(scraped_date), 'MMMM') AS scrapped_date_month,
             date_format(week_start, '%m-%Y') AS date_month,
             EXTRACT(week FROM week_start) - EXTRACT(week FROM DATE_TRUNC('month', week_start)) + 1 AS calendar_week_num
     
@@ -203,6 +204,7 @@
         image_url,
         product_url,                    
         channel,
+        scrapped_date_month,
         date_month,
         MAX(CASE WHEN calendar_week_num = 1 THEN price END) AS week1,
         MAX(CASE WHEN calendar_week_num = 2 THEN price END) AS week2,
@@ -217,6 +219,7 @@
         image_url,
         product_url,                    
         channel,
+        scrapped_date_month,
         date_month
     ORDER BY
         relaxo_sku,

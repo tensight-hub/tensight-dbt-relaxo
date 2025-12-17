@@ -11,25 +11,25 @@ SELECT * FROM (
     pm.sku_gender,
     max(image_url) AS image_url,
         MAX(CASE
-            WHEN rr.source = 'amazon'
+            WHEN lower(rr.source) = 'amazon'
             THEN CASE WHEN lower(rr.seller_name) = 'nan' THEN '' ELSE rr.seller_name END
         END) AS amazon,
         MAX(CASE
-            WHEN rr.source = 'flipkart'
+            WHEN lower(rr.source) = 'flipkart'
             THEN CASE WHEN lower(rr.seller_name) = 'nan' THEN '' ELSE rr.seller_name END
         END) AS flipkart,
         MAX(CASE
-            WHEN rr.source = 'myntra'
+            WHEN lower(rr.source) = 'myntra'
             THEN CASE WHEN lower(rr.seller_name) = 'nan' THEN '' ELSE rr.seller_name END
         END) AS myntra,
         MAX(CASE
-            WHEN rr.source = 'Ajio'
+            WHEN lower(rr.source) = 'ajio'
             THEN CASE WHEN lower(rr.seller_name) = 'nan' THEN '' ELSE rr.seller_name END
         END) AS ajio,
-    MAX(CASE WHEN source = 'amazon' THEN product_url END) AS amazon_url,
-    MAX(CASE WHEN source = 'flipkart' THEN product_url END) AS flipkart_url,
-    MAX(CASE WHEN source = 'myntra' THEN product_url END) AS myntra_url,
-    MAX(CASE WHEN source = 'Ajio' THEN product_url END) AS ajio_url
+    MAX(CASE WHEN lower(source) = 'amazon' THEN product_url END) AS amazon_url,
+    MAX(CASE WHEN lower(source) = 'flipkart' THEN product_url END) AS flipkart_url,
+    MAX(CASE WHEN lower(source) = 'myntra' THEN product_url END) AS myntra_url,
+    MAX(CASE WHEN lower(source) = 'ajio' THEN product_url END) AS ajio_url
 
     FROM
     {{ ref('stg_price_parity_master') }} pp

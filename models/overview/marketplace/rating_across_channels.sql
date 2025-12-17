@@ -66,10 +66,10 @@ ORDER BY
     {{ channel_avg_rating('source', 'avg_rating', 'flipkart', 'flipkart_avg_rating') }},
     {{ channel_avg_rating('source', 'avg_rating', 'myntra', 'myntra_avg_rating') }},
     {{ channel_avg_rating('source', 'avg_rating', 'Ajio', 'ajio_avg_rating') }},
-        MAX(CASE WHEN source = 'amazon' THEN product_url END) AS amazon_url,
-    MAX(CASE WHEN source = 'flipkart' THEN product_url END) AS flipkart_url,
-    MAX(CASE WHEN source = 'myntra' THEN product_url END) AS myntra_url,
-    MAX(CASE WHEN source = 'Ajio' THEN product_url END) AS ajio_url
+        MAX(CASE WHEN lower(source) = 'amazon' THEN product_url END) AS amazon_url,
+    MAX(CASE WHEN lower(source) = 'flipkart' THEN product_url END) AS flipkart_url,
+    MAX(CASE WHEN lower(source) = 'myntra' THEN product_url END) AS myntra_url,
+    MAX(CASE WHEN lower(source) = 'ajio' THEN product_url END) AS ajio_url
 
 
     

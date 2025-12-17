@@ -12,15 +12,15 @@ SELECT
     max(image_url) AS image_url,
     
      CAST(MAX(CASE
-        WHEN rr.source = 'amazon'
+        WHEN lower(rr.source) = 'amazon'
         THEN CAST(CASE WHEN lower(rr.avg_rating) = 'nan' THEN '0' ELSE rr.avg_rating END AS DECIMAL(10,2))
     END) AS VARCHAR) AS amazon,
     CAST(MAX(CASE
-        WHEN rr.source = 'flipkart'
+        WHEN lower(rr.source) = 'flipkart'
         THEN CAST(CASE WHEN lower(rr.avg_rating) = 'nan' THEN '0' ELSE rr.avg_rating END AS DECIMAL(10,2))
     END) AS VARCHAR) AS flipkart,
     CAST(MAX(CASE
-        WHEN rr.source = 'myntra'
+        WHEN lower(rr.source) = 'myntra'
         THEN CAST(CASE WHEN lower(rr.avg_rating) = 'nan' THEN '0' ELSE rr.avg_rating END AS DECIMAL(10,2))
     END) AS VARCHAR) AS myntra,
     CAST(MAX(CASE
@@ -68,25 +68,25 @@ SELECT
     pm.sku_gender,
     max(image_url) AS image_url,
     CAST(MAX(CASE
-        WHEN rr.source = 'amazon'
+        WHEN lower(rr.source) = 'amazon'
         THEN CAST(CAST(CASE WHEN lower(rr.no_of_reviews) = 'nan' THEN '0' ELSE rr.no_of_reviews END AS DECIMAL) AS INT)
     END) AS VARCHAR) AS amazon,
     CAST(MAX(CASE
-        WHEN rr.source = 'flipkart'
+        WHEN lower(rr.source) = 'flipkart'
         THEN CAST(CAST(CASE WHEN lower(rr.no_of_reviews) = 'nan' THEN '0' ELSE rr.no_of_reviews END AS DECIMAL) AS INT)
     END) AS VARCHAR) AS flipkart,
     CAST(MAX(CASE
-        WHEN rr.source = 'myntra'
+        WHEN lower(rr.source) = 'myntra'
         THEN CAST(CAST(CASE WHEN lower(rr.no_of_reviews) = 'nan' THEN '0' ELSE rr.no_of_reviews END AS DECIMAL) AS INT)
     END) AS VARCHAR) AS myntra,
     CAST(MAX(CASE
-        WHEN rr.source = 'Ajio'
+        WHEN lower(rr.source) = 'ajio'
         THEN CAST(CAST(CASE WHEN lower(rr.no_of_reviews) = 'nan' THEN '0' ELSE rr.no_of_reviews END AS DECIMAL) AS INT)
     END) AS VARCHAR) AS ajio,
-    MAX(CASE WHEN rr.source = 'amazon' THEN rr.product_url END) AS amazon_url,
-    MAX(CASE WHEN rr.source = 'flipkart' THEN rr.product_url END) AS flipkart_url,
-    MAX(CASE WHEN rr.source = 'myntra' THEN rr.product_url END) AS myntra_url,
-    MAX(CASE WHEN rr.source = 'Ajio' THEN rr.product_url END) AS ajio_url
+    MAX(CASE WHEN lower(rr.source) = 'amazon' THEN rr.product_url END) AS amazon_url,
+    MAX(CASE WHEN lower(rr.source) = 'flipkart' THEN rr.product_url END) AS flipkart_url,
+    MAX(CASE WHEN lower(rr.source) = 'myntra' THEN rr.product_url END) AS myntra_url,
+    MAX(CASE WHEN lower(rr.source) = 'ajio' THEN rr.product_url END) AS ajio_url
 
 FROM
     {{ ref('stg_price_parity_master') }} pp

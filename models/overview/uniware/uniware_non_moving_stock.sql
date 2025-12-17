@@ -1,6 +1,7 @@
 SELECT 
     sku_code,
     facility_code,
+    type,
     soh,
     units_sold_30,
     units_sold_60,

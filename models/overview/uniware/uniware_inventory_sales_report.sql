@@ -249,11 +249,11 @@ WITH latest_inventory AS (
         -- b.sub_brand,
         a.stock_date,
         a.available_atp AS soh
-    FROM stg_unicommerce_inventory a
+    FROM {{ ref("stg_unicommerce_inventory") }} a
     -- LEFT JOIN stg_product_master b
     --     ON a.sku_code = b.sku_relaxo
     WHERE a.stock_date = (
-        SELECT MAX(stock_date) FROM stg_unicommerce_inventory
+        SELECT MAX(stock_date) FROM {{ ref("stg_unicommerce_inventory") }}
     )
 ),
 
@@ -285,7 +285,7 @@ order_agg AS (
             END
         ) AS units_sold_90
 
-    FROM stg_unicommerce_orders
+    FROM {{ ref("stg_unicommerce_orders") }}
     GROUP BY 1,2
 ),
 base_data AS (

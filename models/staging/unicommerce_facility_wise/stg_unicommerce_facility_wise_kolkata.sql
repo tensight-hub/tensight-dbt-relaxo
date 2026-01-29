@@ -26,6 +26,7 @@ renamed as (
             THEN substr("item sku code" , 1, 19)
         ELSE substr("item sku code" , 1, 18)
         END AS item_sku_code,
+        "item sku code" as item_sku_code_raw,
         "reverse pickup code" as reverse_pickup_code,
 
         -- product info

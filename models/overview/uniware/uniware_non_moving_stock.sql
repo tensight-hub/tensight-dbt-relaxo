@@ -11,7 +11,7 @@
 
 WITH latest_inventory AS (
     SELECT
-        a.sku_code,
+        a.sku_code_raw AS sku_code,
         a.facility_code,
         a.type,
         b.sku_category,
@@ -24,7 +24,7 @@ WITH latest_inventory AS (
         a.available_atp AS soh
     FROM {{ ref('stg_unicommerce_inventory') }} a
     LEFT JOIN {{ ref('stg_product_master') }} b
-        ON a.sku_code = b.sku_relaxo
+        ON a.sku_code_raw = b.sku_item_code
     WHERE a.stock_date = (
         SELECT MAX(stock_date) FROM {{ ref('stg_unicommerce_inventory') }}
     )
@@ -32,7 +32,7 @@ WITH latest_inventory AS (
 
 order_agg AS (
     SELECT
-        item_sku_code AS sku_code,
+        item_sku_code_raw AS sku_code,
         facility_code,
 
         COUNT(*) AS units_sold,

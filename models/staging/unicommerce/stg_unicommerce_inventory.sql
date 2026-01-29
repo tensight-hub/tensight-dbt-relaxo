@@ -38,6 +38,7 @@ renamed as (
             THEN substr("sku code", 1, 19)
         ELSE substr("sku code", 1, 18)
     END AS sku_code,
+    "sku code" as sku_code_raw,
     "item name" as item_name,
     shelf,
     batch,

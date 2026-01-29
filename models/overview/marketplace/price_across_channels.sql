@@ -72,7 +72,7 @@ SELECT
     {{ channel_product_url('source', 'product_url', 'amazon', 'amazon_url') }},
     {{ channel_product_url('source', 'product_url', 'flipkart', 'flipkart_url') }},
     {{ channel_product_url('source', 'product_url', 'myntra', 'myntra_url') }},
-    {{ channel_product_url('source', 'product_url', 'Ajio', 'ajio_url') }},
+    {{ channel_product_url('source', 'product_url', 'ajio', 'ajio_url') }},
     
     MAX(
         CASE WHEN lower(source) = 'amazon'

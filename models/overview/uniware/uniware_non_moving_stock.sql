@@ -72,7 +72,7 @@ SELECT distinct
     COALESCE(o.units_sold_30, 0)  AS units_sold_30,
     COALESCE(o.units_sold_60, 0)  AS units_sold_60,
     COALESCE(o.units_sold_90, 0)  AS units_sold_90,
-    ROW_NUMBER() OVER (PARTITION BY i.sku_code,i.facility_code ORDER BY i.sku_code,i.facility_code  ASC) rn
+    ROW_NUMBER() OVER (PARTITION BY i.sku_code,i.facility_code,i.type ORDER BY i.sku_code,i.facility_code,i.type  ASC) rn
 FROM latest_inventory i
 LEFT JOIN order_agg o
     ON i.sku_code = o.sku_code

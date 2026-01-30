@@ -262,7 +262,7 @@ SUM(
     THEN so.units_sold ELSE 0  
   END
 ) AS units_sold_90,
-row_number() over (partition by so.created_date, ib.sku_code, ib.facility_code order by so.created_date asc) as rn
+row_number() over (partition by so.created_date, ib.sku_code, ib.facility_code, ib.type order by so.created_date asc) as rn
     FROM
     (
       SELECT DISTINCT

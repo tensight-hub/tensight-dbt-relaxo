@@ -261,8 +261,8 @@ SUM(
     WHEN so.created_date >= DATE_ADD('day', -90, CURRENT_DATE)
     THEN so.units_sold ELSE 0  
   END
-) AS units_sold_90
-
+) AS units_sold_90,
+row_number() over (partition by so.created_date, ib.sku_code, ib.facility_code order by so.created_date asc) as rn
     FROM
     (
       SELECT DISTINCT
@@ -298,7 +298,25 @@ SUM(
     AND ib.facility_code = so.facility_code
     GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13
 )
-SELECT * FROM InventoryDetails;
+SELECT 
+    sku_code,
+    facility_code,
+    type,
+    sku_relaxo,
+    sku_category,
+    sku_sub_category,
+    name,
+    sku_size,
+    sku_gender,
+    sub_brand,
+    stock_date,
+    soh,
+    created_date,
+    case when rn = 1 then units_sold else 0 end as units_sold,
+    case when rn = 1 then units_sold_30 else 0 end as units_sold_30,
+    case when rn = 1 then units_sold_60 else 0 end as units_sold_60,
+    case when rn = 1 then units_sold_90 else 0 end as units_sold_90
+ FROM InventoryDetails;
 
 
 

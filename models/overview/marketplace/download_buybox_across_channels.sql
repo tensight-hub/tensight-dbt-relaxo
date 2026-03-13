@@ -5,6 +5,7 @@ WITH LatestDateWiseSellerName AS (
         source,
         product_id,
         seller_name,
+        tagging,
         ROW_NUMBER() OVER(PARTITION BY relaxo_sku, source, product_id ORDER BY scraped_date DESC) as rn
    from 
 {{ ref('int_buybox_rating_and_reviews') }}
@@ -14,6 +15,7 @@ SELECT
     scraped_date,
     source,
     product_id,
-    seller_name
+    seller_name,
+    tagging
 FROM LatestDateWiseSellerName
 WHERE rn = 1;

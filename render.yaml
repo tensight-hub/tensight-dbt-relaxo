@@ -1,6 +1,6 @@
 services:
   - type: cron
-    name: tensight-haus-kinder-dbt
+    name: tensight-dbt-relaxo
     runtime: python
     buildCommand: pip install -r requirements.txt
     schedule: "0 2 * * *"  # daily at 2:00 AM UTC — adjust as needed

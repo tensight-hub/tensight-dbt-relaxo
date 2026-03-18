@@ -1,4 +1,4 @@
-tensight_haus_kinder:
+tensight_relaxo:
   target: prod
   outputs:
     prod:
